@@ -15,16 +15,22 @@ def get_box_and_names(index, data):
         i+=1
         if len(data.index)-1 == i:
             break
+    #print([boxes,labels])
     return [boxes,labels]
 
 def baggage_csv_reader(path_to_csv_dir):
-    dic = {}
+    dic = dict()
     for file in os.listdir(path_to_csv_dir):
         if file[-3:] == 'csv':
             data = pd.read_csv(path_to_csv_dir+"/"+file)
-            print("fikk lest", file)
+            print("Reading ", file)
             for i in range(len(data.index)):
                 if (i<(len(data.index)-1)):
-                    dic[data.iloc[i,0][-14:]] = get_box_and_names(i, data)
+                    
+                    filename = data.iloc[i,0][-14:]
+                    if filename not in dic:
+                        bbox = get_box_and_names(i, data)
+                        dic.update( {filename: bbox} )
+                                    
 
     return dic
