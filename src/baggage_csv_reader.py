@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 
-def get_box_and_names(index):
+def get_box_and_names(index, data):
     i = index
     boxes = list()
     labels = list()
@@ -20,9 +20,11 @@ def get_box_and_names(index):
 def baggage_csv_reader(path_to_csv_dir):
     dic = {}
     for file in os.listdir(path_to_csv_dir):
-        data = pd.read_csv(path_to_csv_dir+"/"+file)
-        for i in range(len(data.index)):
-            if (i<(len(data.index)-1)):
-                dic[data.iloc[i,0][-14:]] = get_box_and_names(i)
-                
+        if file[-3:] == 'csv':
+            data = pd.read_csv(path_to_csv_dir+"/"+file)
+            print("fikk lest", file)
+            for i in range(len(data.index)):
+                if (i<(len(data.index)-1)):
+                    dic[data.iloc[i,0][-14:]] = get_box_and_names(i, data)
+
     return dic
