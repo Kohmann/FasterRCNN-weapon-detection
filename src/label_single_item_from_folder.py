@@ -10,7 +10,7 @@ import os
 
 def training_data_from_baggage(path):
     
-    folders = ["B0049", "B0050", "B0051", "B0076", "B0077"]
+    folders = ["B0049", "B0050", "B0051", "B0076"] # "B0077"
     categories = {"B0049": 'handgun', "B0050": 'shuriken', "B0051": 'razorblade' ,"B0076": 'knife'} # extra "B0077": 'knife'
     
     dic = dict()
